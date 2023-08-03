@@ -1,4 +1,8 @@
 extends base.pug
 
 block content 
-    h1 사용자 편집
+    h4 영상을 편집하자 
+    form(method="POST")
+        input(name="title",placehodler="Video Title",value=video.title,required)
+        input(value="Save", type="submit")
+        
