@@ -5,17 +5,11 @@ html(lang="ko")
         link(rel="stylesheet" href="https://unpkg.com/mvp.css") 
     body
         header
-            if fakeUser.loggedIn
-                small #{fakeUser.username}님 환영합니다!
+            h1=pageTitle
             nav
-                ul
-                    if fakeUser.loggedIn
-                        li  
-                            a(href="/logout") Logout
-                    else
-                        li 
-                            a(href="/login") login 
-            h1=pageTitle 
+                ul  
+                    li  
+                        a(href="/videos/upload") 영상 업로드 
         main
             block content
     include partials/footer.pug
