@@ -1,4 +1,4 @@
-import Video from "../models/Video";
+import Video, { formatHashTags } from "../models/Video";
 
 export const home = async (req, res) => {
     const videos = await Video.find({});
@@ -29,15 +29,16 @@ export const getEdit = async(req, res) => {
 
 export const postEdit = async (req, res) => {
   const id = req.params.id;
-  const video= await Video.findById(id);
+  const video= await Video.exists({_id:id});
   const{title,description,hashtags}=req.body;
   if(!video){
     return res.render("404",{pageTitle: "영상이 없어요!"})
   }
-  video.title=title;
-  video.description=description;
-  video.hashtags=hashtags.split(",").map((word)=>`#${word}`);
-  await video.save();
+  await Video.findByIdAndUpdate(id,{
+    title,description, 
+    hashtags: formatHashTags(hashtags),
+  })
+  
   return res.redirect(`/videos/${id}`);
 };
 
@@ -50,8 +51,7 @@ export const postUpload = async (req, res) => {
  try{await Video.create({
     title,
     description,
-    createdAt: Date.now(),
-    hashtags: hashtags.split(",").map((word)=>`#${word}`),
+    hashtags: formatHashTags(hashtags),
   })
     return res.redirect("/");
 }catch(error){

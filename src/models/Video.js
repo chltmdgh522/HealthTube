@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+export const formatHashTags=(hashtags)=>hashtags.split(",").map((word)=> word.startsWith('#') ? word : `#${word}`);
 
 const videoSchema = new mongoose.Schema({
   title: {type: String, required: true, trim: true, maxLength: 20},
@@ -10,6 +11,8 @@ const videoSchema = new mongoose.Schema({
     rating: {type: Number, default:0, required: true},
   },
 });
+
+
 
 const Video = mongoose.model("Video", videoSchema);
 export default Video;
