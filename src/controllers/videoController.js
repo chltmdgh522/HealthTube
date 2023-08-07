@@ -9,20 +9,35 @@ export const search = (req, res) => {
   // TODO: Search implementation
 };
 
-export const watch = (req, res) => {
+export const watch = async(req, res) => {
   const id = req.params.id;
-  return res.render("watch", { pageTitle: "🚀watching 🚀" });
+  const video= await Video.findById(id);
+  if(video){
+  return res.render("watch", { pageTitle: "🚀"+video.title+"🚀", video })
+  }
+  return res.render("404",{pageTitle: "해당 영상이 없습니다."});
 };
 
-export const getEdit = (req, res) => {
+export const getEdit = async(req, res) => {
   const id = req.params.id;
-  return res.render("edit", {
-    pageTitle: `Edting ??의 제목을 편집해보세요`,
-  });
+  const video= await Video.findById(id);
+  if(!video){
+    return res.render("404",{pageTitle: "해당 영상이 없습니다."});
+  }
+  return res.render("edit", {pageTitle: `"${video.title}"의 영상을 편집해보세요`,video });
 };
 
-export const postEdit = (req, res) => {
+export const postEdit = async (req, res) => {
   const id = req.params.id;
+  const video= await Video.findById(id);
+  const{title,description,hashtags}=req.body;
+  if(!video){
+    return res.render("404",{pageTitle: "영상이 없어요!"})
+  }
+  video.title=title;
+  video.description=description;
+  video.hashtags=hashtags.split(",").map((word)=>`#${word}`);
+  await video.save();
   return res.redirect(`/videos/${id}`);
 };
 
