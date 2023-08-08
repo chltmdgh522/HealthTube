@@ -66,11 +66,11 @@ export const deleteVideo=async(req,res)=>{
 
 export const search=async(req,res)=>{
   const {keyword}=req.query;
-  let videos;
+  let videos=[];
   if(keyword){
     videos=await Video.find({
       title: {
-        $regex:new RegExp(`${keyword}$`,"i"), //검색 자유 
+        $regex: new RegExp(`${keyword}$`,"i"), //검색 자유 
       },
     });
   }
