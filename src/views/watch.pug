@@ -3,5 +3,9 @@ extends base.pug
 block content 
     p=video.description
     smal=video.createdAt 
-    </br>
+    br
     a(href=`${video.id}/edit`) 📤Edit Video &rarr;
+    br
+    br
+    a(href=`${video.id}/delete`) ❌Delete Video &rarr;
+
