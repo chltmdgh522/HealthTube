@@ -1,4 +1,5 @@
 import User from "../models/User";
+import bcrypt from "bcrypt";
 export const getJoin =(req,res) =>res.render("join",{pageTitle: "회원가입"});
 export const postJoin =async(req,res) =>{
     const{name,username,email,password,password2,location}=req.body;
@@ -44,7 +45,16 @@ export const postLogin=async(req,res)=>{
     if(!exists){
         return res.status(400).render("login",{pageTitle:"로그인",errorMessage:"존재하지 않은 아이디입니다."});
     }
-    res.end();
+    const user=await User.findOne({username});
+    const ok=await bcrypt.compare(password, user.password);
+    if(!ok){
+        return res.status(400).render("login",{
+            pageTitle:"로그인",
+            errorMessage:"비밀번호가 틀렸습니다."
+        });
+    }
+    
+    return res.redirect("/");
 }
 
 
