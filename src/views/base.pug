@@ -1,7 +1,7 @@
 doctype html 
 html(lang="ko")
     head 
-        title #{pageTitle} | HealthTube
+        title #{pageTitle} | #{siteName}
         link(rel="stylesheet" href="https://unpkg.com/mvp.css") 
     body
         header
@@ -10,12 +10,23 @@ html(lang="ko")
                 ul  
                     li  
                         a(href="/videos/upload") 🆙영상 업로드 
+                    
                     li 
-                        a(href="/") 🏠홈 화면🏠 
+                        a(href="/") 🏠홈 화면
                     li 
                         a(href="/search") 🔎검색
-                    li 
-                        a(href="/join") 🧑‍🤝‍🧑회원가입
+                    if loggedIn 
+                        li
+                            a(href="/my-profile") #{loggedInUser.name}의 프로필
+                        li  
+                            a(href="/logout") ❌로그아웃
+                    else    
+                        li 
+                            a(href="/login") 👪로그인    
+                        li 
+                            a(href="/join") 🧑‍🤝‍🧑회원가입
+                     
+
         main
             block content
     include partials/footer.pug
