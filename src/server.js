@@ -17,10 +17,13 @@ app.set("views",process.cwd()+"/src/views");
 
 app.use(express.urlencoded({extended: true}));
 app.use(session({
-    secret:"Hello",
-    resave: true,
-    saveUninitialized: true,
-    store: MongoStore.create({mongoUrl:"mongodb://127.0.0.1:27017/cshhealthtube"}),
+    secret:process.env.COOKIE_SECRET,
+    resave: false, //모든 request마다 세션의 변경사항이 있든 없든 세션을 다시 저장한다.
+    saveUninitialized: false, //uninitialized 상태인 세션을 저장한다. 여기서 uninitialized 상태인 세션이란 request 때 생성된 이후로 아무런 작업이 가해지지않는 초기상태의 세션을 말한다.
+    store: MongoStore.create({mongoUrl: process.env.DB_URL}),
+    cookie: {
+        maxAge:20000,
+    },
 }));
 
 app.use(localsMiddleware);

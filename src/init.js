@@ -1,4 +1,5 @@
-import "./db";
+import "dotenv/config"; //몽고서버주소와 세션 secret 문구를 환경변수에서 설정해줘서 import해줌 
+import "./db";//바로 db연결 
 import "./models/Video";
 import "./models/User";
 import app from "./server";

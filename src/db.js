@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-mongoose.connect("mongodb://127.0.0.1:27017/cshhealthtube",
+mongoose.connect(process.env.DB_URL, //환경변수에서 가져옴 
 {useNewUrlParser:true,
 useUnifiedTopology:true,}
 );
