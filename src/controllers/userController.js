@@ -42,7 +42,7 @@ export const getLogin=(req,res)=>{
 }
 export const postLogin=async(req,res)=>{
     const{username,password}=req.body;
-    const exists=await User.exists({username, socialOnly:false})
+    const exists=await User.exists({username, socialOnly:false});
     if(!exists){
         return res.status(400).render("login",{pageTitle:"로그인",errorMessage:"존재하지 않은 아이디입니다."});
     }
