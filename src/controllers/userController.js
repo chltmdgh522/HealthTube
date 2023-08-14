@@ -152,7 +152,6 @@ export const postEdit=async(req,res)=>{
     location,
   });
   return res.render("edit-profile");
-
 };
 export const remove=(req,res)=>res.send("Delete User" );
 
