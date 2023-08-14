@@ -145,13 +145,15 @@ export const getEdit=(req,res)=>{
 export const postEdit=async(req,res)=>{
   const id=req.session.user._id; //object에서 id찾아줌
   const {name,email,username,location}=req.body;
-  await User.findByIdAndUpdate(id,{
+  const updateUser=await User.findByIdAndUpdate(id,{
     name,
     email,
     username,
     location,
-  });
-  return res.render("edit-profile");
+  },
+  {new: true});
+  req.session.user=updateUser;
+  return res.redirect("/users/edit");
 };
 export const remove=(req,res)=>res.send("Delete User" );
 
