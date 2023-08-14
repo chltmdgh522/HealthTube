@@ -138,7 +138,22 @@ export const finishGithubLogin=async(req,res)=>{
         return res.redirect("/");
       };
 
-export const edit=(req,res)=>res.send("edit");
+export const getEdit=(req,res)=>{
+  return res.render("edit-profile",{pageTitle:"프로필"});
+};
+
+export const postEdit=async(req,res)=>{
+  const id=req.session.user._id; //object에서 id찾아줌
+  const {name,email,username,location}=req.body;
+  await User.findByIdAndUpdate(id,{
+    name,
+    email,
+    username,
+    location,
+  });
+  return res.render("edit-profile");
+
+};
 export const remove=(req,res)=>res.send("Delete User" );
 
 

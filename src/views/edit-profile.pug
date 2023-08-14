@@ -1,0 +1,9 @@
+extends base
+
+block content 
+    form(method="POST")
+        input(placeholder="본인 이름",name="name",type="text",required, value=loggedInUser.name)
+        input(placeholder="이메일",name="email",type="email",required,value=loggedInUser.email)
+        input(placeholder="아이디",name="username",type="text",required,value=loggedInUser.username)
+        input(placeholder="주소",name="location",type="text",required,value=loggedInUser.email)
+        input(type="submit", value="업데이트 프로필")
