@@ -155,6 +155,13 @@ export const postEdit=async(req,res)=>{
   req.session.user=updateUser;
   return res.redirect("/users/edit");
 };
+
+export const getChangePassword=(req,res)=>{
+  return res.render("change-password",{pageTitle:"비밀번호 변경"})
+};
+export const postChangePassword=(req,res)=>{
+  return res.redirect("/")
+};
 export const remove=(req,res)=>res.send("Delete User" );
 
 
