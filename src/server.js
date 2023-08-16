@@ -22,7 +22,7 @@ app.use(session({
     saveUninitialized: false, //uninitialized 상태인 세션을 저장한다. 여기서 uninitialized 상태인 세션이란 request 때 생성된 이후로 아무런 작업이 가해지지않는 초기상태의 세션을 말한다.
     store: MongoStore.create({mongoUrl: process.env.DB_URL}),
     cookie: {
-        maxAge:200000,
+        maxAge:20000000,
     },
 }));
 

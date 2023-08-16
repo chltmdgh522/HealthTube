@@ -39,20 +39,22 @@ export const postEdit = async (req, res) => {
 };
 
 export const getUpload = (req, res) => {
-  return res.render("upload", { pageTitle: "🔄Upload Video🔄" });
+  return res.render("upload", { pageTitle: "🔄영상 업로드🔄" });
 };
 
 export const postUpload = async (req, res) => {
+  const file=req.file;
   const { title,description,hashtags } = req.body;
  try{await Video.create({
     title,
     description,
+    fileUrl:file.path,
     hashtags: formatHashTags(hashtags),
   })
     return res.redirect("/");
 }catch(error){
     console.log(error);
-    return res.render("upload", { pageTitle: "🔄Upload Video🔄",errorMessage:error._message });
+    return res.render("upload", { pageTitle: "🔄영상 업로드🔄",errorMessage:error._message });
 }
 };
 
