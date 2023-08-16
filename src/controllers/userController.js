@@ -139,7 +139,7 @@ export const finishGithubLogin=async(req,res)=>{
       };
 
 export const getEdit=(req,res)=>{
-  return res.render("edit-profile",{pageTitle:"프로필"});
+  return res.render("edit-profile",{pageTitle:"프로필 수정"});
 };
 
 export const postEdit=async(req,res)=>{
@@ -151,16 +151,38 @@ export const postEdit=async(req,res)=>{
     username,
     location,
   },
-  {new: true});
+  {new: true}); //find 함수가 업데이트 된후 데이터를 준다. 
   req.session.user=updateUser;
   return res.redirect("/users/edit");
 };
 
 export const getChangePassword=(req,res)=>{
-  return res.render("change-password",{pageTitle:"비밀번호 변경"})
+  if(req.session.user.socialOnly==true){
+    return res.redirect("/");
+  }
+  return res.render("change-password",{pageTitle:"비밀번호 변경"});
 };
-export const postChangePassword=(req,res)=>{
-  return res.redirect("/")
+export const postChangePassword=async(req,res)=>{
+  const id=req.session.user._id;
+  const password=req.session.user.password;
+  const{oldPassword,newPassword,newPasswordConfirm}=req.body;
+  const ok=await bcrypt.compare(oldPassword,password);
+  if(!ok){
+    return res.status(400).render("change-password",
+    {pageTitle:"비밀번호 변경",
+    errorMessage:"현재 비밀번호가 일치하지 않습니다."});
+  }
+
+  if(newPassword!=newPasswordConfirm){
+    return res.status(400).render("change-password",
+    {pageTitle:"비밀번호 변경",
+    errorMessage:"새 비밀번호가 일치하지 않습니다."});
+  }
+  const user=await User.findById(id);  
+  user.password=newPassword;
+  await user.save();
+  req.session.user.password=user.password;
+  return res.redirect("/users/logout")
 };
 export const remove=(req,res)=>res.send("Delete User" );
 
