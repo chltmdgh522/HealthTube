@@ -143,9 +143,15 @@ export const getEdit=(req,res)=>{
 };
 
 export const postEdit=async(req,res)=>{
-  const id=req.session.user._id; //object에서 id찾아줌
-  const {name,email,username,location}=req.body;
-  const updateUser=await User.findByIdAndUpdate(id,{
+  const{
+    session:{
+      user:{_id, avatarUrl},
+    },
+    body: {name,email,username,location},
+    file,
+  }= req;
+  const updateUser=await User.findByIdAndUpdate(_id,{
+    avatarUrl: file ? file.path:avatarUrl,
     name,
     email,
     username,
