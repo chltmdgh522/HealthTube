@@ -17,7 +17,7 @@ html(lang="ko")
                         li 
                             a(href="/users/edit") 프로필 수정
                         li
-                            a(href="/my-profile") #{loggedInUser.name}의 프로필
+                            a(href=`/users/${loggedInUser._id}`) #{loggedInUser.name}의 프로필
                         li  
                             a(href="/videos/upload") 🆙영상 업로드     
                         li  
