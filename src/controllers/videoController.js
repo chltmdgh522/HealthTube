@@ -1,4 +1,5 @@
 import Video, { formatHashTags } from "../models/Video";
+import User from "../models/User";
 
 export const home = async (req, res) => {
     const videos = await Video.find({}).sort({createdAt:"desc"});
@@ -8,8 +9,9 @@ export const home = async (req, res) => {
 export const watch = async(req, res) => {
   const id = req.params.id;
   const video= await Video.findById(id);
+  const owner=await User.findById(video.owner);
   if(video){
-  return res.render("watch", { pageTitle: "🚀"+video.title+"🚀", video })
+  return res.render("watch", { pageTitle: "🚀"+video.title+"🚀", video,owner })
   }
   return res.render("404",{pageTitle: "해당 영상이 없습니다."});
 };
@@ -43,12 +45,16 @@ export const getUpload = (req, res) => {
 };
 
 export const postUpload = async (req, res) => {
+  const{
+    user:{_id}
+  }=req.session;
   const file=req.file;
   const { title,description,hashtags } = req.body;
  try{await Video.create({
     title,
     description,
     fileUrl:file.path,
+    owner:_id,
     hashtags: formatHashTags(hashtags),
   })
     return res.redirect("/");

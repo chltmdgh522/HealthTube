@@ -4,10 +4,13 @@ block content
     video(src="/"+video.fileUrl,controls) 
     div
         p=video.description
-        smal=video.createdAt 
-    br
-    a(href=`${video.id}/edit`) 📤Edit Video &rarr;
-    br
-    br
-    a(href=`${video.id}/delete`) ❌Delete Video &rarr;
+        small=video.createdAt
+     
+    div  
+        small 작성자: #{owner.name}
+    if String(video.owner)==String(loggedInUser._id)
+        a(href=`${video.id}/edit`) 📤Edit Video &rarr;
+        br
+        br
+        a(href=`${video.id}/delete`) ❌Delete Video &rarr;
 

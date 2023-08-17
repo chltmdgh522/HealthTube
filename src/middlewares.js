@@ -2,8 +2,8 @@ import multer from "multer";
 export const localsMiddleware=(req,res,next)=>{
     res.locals.loggedIn=Boolean(req.session.loggedIn);
     res.locals.siteName="HealthTube";
-    console.log(res.locals);
-    res.locals.loggedInUser=req.session.user || {};
+    console.log(res.locals); 
+    res.locals.loggedInUser=req.session.user || {}; //locals를 통해 템플릿 엔진에서 사용가능
     next();
 };
 
