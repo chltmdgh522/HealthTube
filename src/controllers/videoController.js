@@ -8,10 +8,12 @@ export const home = async (req, res) => {
 
 export const watch = async(req, res) => {
   const id = req.params.id;
-  const video= await Video.findById(id);
-  const owner=await User.findById(video.owner);
+  const video= await Video.findById(id).populate("owner");
+   //  populate는 이것 const owner=await User.findById(video.owner);
+   // 이것은 User랑 연결된거 알아서 모든 정보 보여줌
+   // reunder에 굳이 안써도 됨
   if(video){
-  return res.render("watch", { pageTitle: "🚀"+video.title+"🚀", video,owner })
+  return res.render("watch", { pageTitle: "🚀"+video.title+"🚀", video })
   }
   return res.render("404",{pageTitle: "해당 영상이 없습니다."});
 };
@@ -50,13 +52,17 @@ export const postUpload = async (req, res) => {
   }=req.session;
   const file=req.file;
   const { title,description,hashtags } = req.body;
- try{await Video.create({
+ try{
+  const newVideo= await Video.create({
     title,
     description,
     fileUrl:file.path,
     owner:_id,
     hashtags: formatHashTags(hashtags),
-  })
+  });
+  const user= await User.findById(_id);
+  user.videos.push(newVideo._id);
+  user.save();
     return res.redirect("/");
 }catch(error){
     console.log(error);

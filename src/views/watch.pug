@@ -7,8 +7,9 @@ block content
         small=video.createdAt
      
     div  
-        small 작성자: #{owner.name}
-    if String(video.owner)==String(loggedInUser._id)
+        small 작성자:
+            a(href=`/users/${video.owner._id}`) #{video.owner.name}
+    if String(video.owner._id)==String(loggedInUser._id)
         a(href=`${video.id}/edit`) 📤Edit Video &rarr;
         br
         br
