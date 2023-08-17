@@ -21,8 +21,14 @@ export const watch = async(req, res) => {
 export const getEdit = async(req, res) => {
   const id = req.params.id;
   const video= await Video.findById(id);
+  const{
+    user:{_id},
+  }=req.session;
   if(!video){
     return res.render("404",{pageTitle: "해당 영상이 없습니다."});
+  }
+  if(String(video.owner) !=String(_id) ){
+    return res.status(403).redirect("/");
   }
   return res.render("edit", {pageTitle: `"${video.title}"의 영상을 편집해보세요`,video });
 };
@@ -34,6 +40,8 @@ export const postEdit = async (req, res) => {
   if(!video){
     return res.render("404",{pageTitle: "영상이 없어요!"})
   }
+
+  
   await Video.findByIdAndUpdate(id,{
     title,description, 
     hashtags: formatHashTags(hashtags),
@@ -62,6 +70,7 @@ export const postUpload = async (req, res) => {
   });
   const user= await User.findById(_id);
   user.videos.push(newVideo._id);
+
   user.save();
     return res.redirect("/");
 }catch(error){
@@ -71,11 +80,24 @@ export const postUpload = async (req, res) => {
 };
 
 
-export const deleteVideo=async(req,res)=>{
-  const{id}=req.params;
-  await Video.findByIdAndDelete(id);
+export const deleteVideo = async (req, res) => {
+const { id } = req.params;
+const {
+user: { _id },
+} = req.session;
+const video = await Video.findById(id);
+const user = await User.findById(_id);
+if(!video){
+return res.status(404).render("404", { pageTitle: "Video not found." });
+}
+if (String(video.owner) !== String(_id)) {
+return res.status(403).redirect("/");
+}
 
-  return res.redirect("/");
+await Video.findByIdAndDelete(id);
+user.videos.splice(user.videos.indexOf(id),1);
+user.save();
+return res.redirect("/");
 };
 
 export const search=async(req,res)=>{
