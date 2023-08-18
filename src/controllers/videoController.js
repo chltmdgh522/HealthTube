@@ -2,7 +2,10 @@ import Video, { formatHashTags } from "../models/Video";
 import User from "../models/User";
 
 export const home = async (req, res) => {
-    const videos = await Video.find({}).sort({createdAt:"desc"});
+    //const videos = await Video.find({}).sort({createdAt:"desc"});
+    const videos = await Video.find({})
+    .sort({ createdAt: "desc" })
+    .populate("owner");
     return res.render("home", { pageTitle: "🏠Home🏠", videos });
 };
 
@@ -11,7 +14,7 @@ export const watch = async(req, res) => {
   const video= await Video.findById(id).populate("owner");
    //  populate는 이것 const owner=await User.findById(video.owner);
    // 이것은 User랑 연결된거 알아서 모든 정보 보여줌
-   // reunder에 굳이 안써도 됨
+   // render에 굳이 안써도 됨
   if(video){
   return res.render("watch", { pageTitle: "🚀"+video.title+"🚀", video })
   }
@@ -108,7 +111,7 @@ export const search=async(req,res)=>{
       title: {
         $regex: new RegExp(`${keyword}$`,"i"), //검색 자유 
       },
-    });
+    }).populate("owner");
   }
   return res.render("search",{pageTitle:"Search",videos});
 }

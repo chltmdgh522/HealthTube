@@ -4,10 +4,8 @@ include mixins/video
 
 block content 
     h2 💪헬스튜브에 오신것을 환영합니다.🎥
-    ul 
-        each video in videos 
+    div.video-grid
+        each video in videos
             +video(video)
-        else 
-            li 정보가 없다.
-    input(placeholder="이름을 입력하세요")
-    button 입력
+        else
+            span.empty__message No videos found

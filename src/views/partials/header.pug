@@ -1,22 +1,29 @@
 header
-    a(href="/")
+    a(href="/").header__logo
         i.fas.fa-running
-    h1=pageTitle
     nav
         ul
+            li
+                a(href="/search")
+                    i.fas.fa-search
             if loggedIn
                 li
-                    a(href="/videos/upload") 🆙영상 업로드   
+                    a(href="/videos/upload") 🆙영상 업로드 
+               
                 li
-                    a(href=`/users/${loggedInUser._id}`) #{loggedInUser.name}의 프로필
+                    a(href=`/users/${loggedInUser._id}`)
+                        if loggedInUser.socialOnly 
+                            img(src=loggedInUser.avatarUrl).header__avatar 
+                        else 
+                            img(src="/" + loggedInUser.avatarUrl).header__avatar
                 li
-                    a(href="/users/edit") 프로필 수정
+                    a(href=`/users/${loggedInUser._id}`) #{loggedInUser.name}의 프로필    
+                li
+                    a(href="/users/edit") 프로필 편집
                 li
                     a(href="/users/logout")  ❌로그아웃
             else
                 li
-                    a(href="/join")  🧑‍🤝‍🧑회원가입
+                    a(href="/login")  👪로그인                    
                 li
-                    a(href="/login")  👪로그인                        
-            li
-                a(href="/search") 🔎검색
+                    a(href="/join").header__btn  🧑‍🤝‍🧑회원가입
