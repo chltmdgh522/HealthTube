@@ -1,0 +1,22 @@
+header
+    a(href="/")
+        i.fas.fa-running
+    h1=pageTitle
+    nav
+        ul
+            if loggedIn
+                li
+                    a(href="/videos/upload") 🆙영상 업로드   
+                li
+                    a(href=`/users/${loggedInUser._id}`) #{loggedInUser.name}의 프로필
+                li
+                    a(href="/users/edit") 프로필 수정
+                li
+                    a(href="/users/logout")  ❌로그아웃
+            else
+                li
+                    a(href="/join")  🧑‍🤝‍🧑회원가입
+                li
+                    a(href="/login")  👪로그인                        
+            li
+                a(href="/search") 🔎검색

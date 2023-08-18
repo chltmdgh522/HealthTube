@@ -28,7 +28,7 @@ app.use(session({
 
 app.use(localsMiddleware);
 app.use("/uploads",express.static("uploads")); //파일의 경로를 브로우저에게 제공해줌 
-app.use("/assets",express.static("assets"));
+app.use("/static",express.static("assets"));
 app.use("/",rootRouter); 
 app.use("/videos",videoRouter);
 app.use("/users",userRouter);
