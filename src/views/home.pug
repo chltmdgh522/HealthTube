@@ -3,9 +3,12 @@ include mixins/video
 
 
 block content 
-    h2 💪헬스튜브에 오신것을 환영합니다.🎥
+    span.hello 승호의 헬스튜브에 오신것을 환영합니다
+    br
+    br
+    br
     div.video-grid
         each video in videos
             +video(video)
         else
-            span.empty__message No videos found
+            span.empty__message 영상이 없어요!! 
