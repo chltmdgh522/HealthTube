@@ -4,9 +4,9 @@ block content
     video(src="/"+video.fileUrl,controls) 
     div
         button#play 플레이
-        button#mute 소리
+        button#mute 무음
         span#time 00:00/00:00
-        input(type="range",step="0.1",min="0",max="1")#volume
+        input(type="range",step="0.1",value=0.5,min="0",max="1")#volume
     //- div
     //-     p=video.description
     //-     small=video.createdAt

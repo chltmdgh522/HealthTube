@@ -103,15 +103,15 @@ user.save();
 return res.redirect("/");
 };
 
-export const search=async(req,res)=>{
-  const {keyword}=req.query;
-  let videos=[];
-  if(keyword){
-    videos=await Video.find({
+export const search = async (req, res) => {
+  const { keyword } = req.query;
+  let videos = [];
+  if (keyword) {
+    videos = await Video.find({
       title: {
-        $regex: new RegExp(`${keyword}$`,"i"), //검색 자유 
+        $regex: new RegExp(`${keyword}$`, "i"),
       },
     }).populate("owner");
   }
-  return res.render("search",{pageTitle:"Search",videos});
-}
+  return res.render("search", { pageTitle: "Search", videos });
+};
