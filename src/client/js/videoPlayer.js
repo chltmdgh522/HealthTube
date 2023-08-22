@@ -4,13 +4,13 @@ const playBtnIcon = playBtn.querySelector("i");
 const muteBtn=document.getElementById("mute");
 const muteBtnIcon = muteBtn.querySelector("i");
 const volumeRange=document.getElementById("volume");
-const currentTime=document.getElementById("currentTime");
-const totalTime=document.getElementById("totalTime");
-const timeline=document.getElementById("timeline");
-const fullScreenBtn=document.getElementById("fullscreen");
+const currenTime=document.getElementById("currenTime");
+const totalTime = document.getElementById("totalTime");
+const timeline = document.getElementById("timeline");
+const fullScreenBtn = document.getElementById("fullScreen");
 const fullScreenIcon = fullScreenBtn.querySelector("i");
-const videoContainer=document.getElementById("videoContainer");
-const videoControls=document.getElementById("videoControls");
+const videoContainer = document.getElementById("videoContainer");
+const videoControls = document.getElementById("videoControls");
 
 let controlsTimeout =null;
 let controlsMovementTimeout=null;
@@ -58,8 +58,8 @@ const handleLoadedMetadata=()=>{
 };
 
 const handleTimeUpdate=()=>{
-    currentTime.innerText = formatTime(Math.floor(video.currentTime));
-    timeline.value=Math.floor(video.currentTime);
+    currenTime.innerText = formatTime(Math.floor(video.currentTime));
+    timeline.value = Math.floor(video.currentTime);
 
 };
 
@@ -101,6 +101,13 @@ const handleMouseLeave=()=>{
     controlsTimeout=setTimeout(hideControls,3000);
 };
 
+document.addEventListener("keyup", (event) => {
+    if (event.code === "Space") {
+    handlePlayClick();
+    }
+    }); // 스페이스바 play stop
+
+    
 playBtn.addEventListener("click", handlePlayClick);
 muteBtn.addEventListener("click",handleMuteClick);
 volumeRange.addEventListener("change",handleVolumeChange); //소리
@@ -110,5 +117,7 @@ timeline.addEventListener("input",handleTimelineChange); // 비디오 시간 연
 fullScreenBtn.addEventListener("click",handleFullscreen);
 videoContainer.addEventListener("mousemove", handleMouseMove);
 videoContainer.addEventListener("mouseleave", handleMouseLeave);
+video.addEventListener("click", handlePlayClick); //비디오 클릭했을때 stop play
+
 
 
