@@ -1,8 +1,9 @@
 const video=document.querySelector("video")
 const playBtn =document.getElementById("play");
 const muteBtn=document.getElementById("mute");
-const time=document.getElementById("time");
 const volumeRange=document.getElementById("volume");
+const currentTime=document.getElementById("currentTime");
+const totalTime=document.getElementById("totalTime");
 
 let volumeValue = 0.5;
 video.volume = volumeValue;
@@ -23,7 +24,7 @@ const handleMuteClick=(e)=>{
         video.muted=true;
     }
     muteBtn.innerText=video.muted ? "소리" : "무음";
-    volumeRange.value=video.muted ? 0 : volumeValue;
+    volumeRange.value=video.muted ? 0 : volumeValue; 
 };
 
 const handleVolumeChange=(evnet)=>{
@@ -38,8 +39,21 @@ const handleVolumeChange=(evnet)=>{
     video.volume=value;
 };
 
+const formatTime=(seconds) => new Date(seconds *1000).toISOString().substring(11,19); //초단위 포멧
+const handleLoadedMetadate=()=>{
+    totalTime.innerText=formatTime(Math.ceil(video.duration)); //비디오의 길이
+
+};
+
+const handleTimeUpdate=()=>{
+    currentTime.innerText = formatTime(Math.floor(video.currentTime));
+
+};
+
 playBtn.addEventListener("click", handlePlayClick);
 muteBtn.addEventListener("click",handleMuteClick);
 volumeRange.addEventListener("change",handleVolumeChange);
+video.addEventListener("loadedmetadata", handleLoadedMetadate);
+video.addEventListener("timeupdate",handleTimeUpdate);
 
 
