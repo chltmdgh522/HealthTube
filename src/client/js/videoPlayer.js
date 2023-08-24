@@ -50,7 +50,7 @@ const handleVolumeChange=(evnet)=>{
     video.volume=value;
 };
 
-const formatTime=(seconds) => new Date(seconds *1000).toISOString().substring(11,19); //초단위 포멧
+const formatTime=(seconds) => new Date(seconds *1000).toISOString().substring(14,19); //초단위 포멧
 const handleLoadedMetadata=()=>{
     totalTime.innerText=formatTime(Math.ceil(video.duration)); //비디오의 길이
     timeline.max=Math.floor(video.duration); //비디오 길이 반환 JS에서 브라우저에게 max 세팅 함
@@ -107,6 +107,12 @@ document.addEventListener("keyup", (event) => {
     }
     }); // 스페이스바 play stop
 
+const handleEnded = () => {
+  const { id } = videoContainer.dataset;
+  fetch(`/api/videos/${id}/view`, {
+    method: "POST",
+  });
+};
     
 playBtn.addEventListener("click", handlePlayClick);
 muteBtn.addEventListener("click",handleMuteClick);
@@ -115,6 +121,7 @@ video.addEventListener("loadedmetadata", handleLoadedMetadata); // 비디오 길
 video.addEventListener("timeupdate",handleTimeUpdate); //시간 업데이트
 timeline.addEventListener("input",handleTimelineChange); // 비디오 시간 연결
 fullScreenBtn.addEventListener("click",handleFullscreen);
+video.addEventListener("ended", handleEnded);
 videoContainer.addEventListener("mousemove", handleMouseMove);
 videoContainer.addEventListener("mouseleave", handleMouseLeave);
 video.addEventListener("click", handlePlayClick); //비디오 클릭했을때 stop play
