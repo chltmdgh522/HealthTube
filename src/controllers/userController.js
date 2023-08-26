@@ -201,6 +201,7 @@ export const see=async(req,res)=>{
     path: "videos",
     populate: {
       path: "owner",
+      
       model: "User",
     },
   });

@@ -61,13 +61,15 @@ export const postUpload = async (req, res) => {
   const{
     user:{_id}
   }=req.session;
-  const file=req.file;
+  const { video, thumb } = req.files;
+  
   const { title,description,hashtags } = req.body;
  try{
   const newVideo= await Video.create({
     title,
     description,
-    fileUrl:file.path,
+    fileUrl: video[0].path,
+    thumbUrl: thumb[0].path.replace(/[\\]/g, "/"),
     owner:_id,
     hashtags: formatHashTags(hashtags),
   });
@@ -120,9 +122,9 @@ export const registerView = async(req,res)=>{
   const {id}=req.params;
   const video=await Video.findById(id);
   if(!video){
-    return res.sendStatus(404)
+    return res.status(404)
   } 
   video.meta.views =video.meta.views+1;
   video.save();
-  return res.sendStatus(200);
+  return res.status(200);
 };
