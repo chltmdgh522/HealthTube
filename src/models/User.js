@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
     password: { type: String },
     name: { type: String, required: true },
     location: String,
+    comments:[{type:mongoose.Schema.Types.ObjectId, required: true, ref:"Comment"}], //사용자는 많은 댓글을 가질 수 있다. 
     videos:[
       {type: mongoose.Schema.Types.ObjectId, required:true, ref: "Video"}]
   });

@@ -12,6 +12,7 @@ const videoSchema = new mongoose.Schema({
     views: {type: Number, default:0, required: true},
     rating: {type: Number, default:0, required: true},
   },
+  comments:[{type:mongoose.Schema.Types.ObjectId, required: true, ref:"Comment"}],//영상은 많은 댓글을 가질 수 있다.
   owner: {type: mongoose.Schema.Types.ObjectId, required: true, ref:"User" }, //로그인한 유저에서 비디오 CRUD를 위해 연결 
 });
 

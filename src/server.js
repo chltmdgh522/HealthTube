@@ -21,6 +21,7 @@ app.use((req, res, next) => {
     next();
     });
 app.use(express.urlencoded({extended: true}));
+app.use(express.json());//서버가 text내용외에 rating 등 여러것들을 받아줄려고 commentSection 참고 
 app.use(session({
     secret:process.env.COOKIE_SECRET,
     resave: false, //모든 request마다 세션의 변경사항이 있든 없든 세션을 다시 저장한다.

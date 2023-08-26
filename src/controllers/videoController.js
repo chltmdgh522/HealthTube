@@ -1,5 +1,7 @@
 import Video, { formatHashTags } from "../models/Video";
+import Comment from "../models/Comment";
 import User from "../models/User";
+import { async } from "regenerator-runtime";
 
 export const home = async (req, res) => {
     //const videos = await Video.find({}).sort({createdAt:"desc"});
@@ -11,7 +13,7 @@ export const home = async (req, res) => {
 
 export const watch = async(req, res) => {
   const id = req.params.id;
-  const video= await Video.findById(id).populate("owner");
+  const video= await Video.findById(id).populate("owner").populate("comments");
    //  populate는 이것 const owner=await User.findById(video.owner);
    // 이것은 User랑 연결된거 알아서 모든 정보 보여줌
    // render에 굳이 안써도 됨
@@ -127,4 +129,26 @@ export const registerView = async(req,res)=>{
   video.meta.views =video.meta.views+1;
   video.save();
   return res.status(200);
+};
+
+export const createComment=async(req,res)=>{
+  const {
+    session:{user},
+    body:{text},
+    params:{id},
+  }=req;
+
+  const video= await Video.findById(id);
+
+  if(!video){
+    return res.sendStatus(404);
+  }
+  const comment=await Comment.create({
+    text,
+    owner: user._id,
+    video: id,
+  });
+  video.comments.push(comment._id); // populate를 위해 comment한거(commetn id)를 저장 
+  video.save();
+  return res.sendStatus(201);
 };
