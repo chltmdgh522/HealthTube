@@ -173,3 +173,7 @@ export const deleteComment = async (req, res) => {
 
   return res.sendStatus(200);
 };
+
+export const getNotice=(req,res)=>{
+return res.render("notice",{pageTitle:"📢notice"});
+};

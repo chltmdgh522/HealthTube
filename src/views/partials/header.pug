@@ -1,6 +1,8 @@
 header
-    a(href="/").header__logo
+    a(href="/").header__logo 
+        span 헬스튜브
         i.fas.fa-running
+        
     nav
         ul
             li
@@ -25,9 +27,9 @@ header
                 li
                     a(href="/users/edit") 프로필 편집
                 li
-                    a(href="/users/logout")  ❌로그아웃
+                    a(href="/users/logout")  로그아웃
             else
                 li
-                    a(href="/login")  👪로그인                    
+                    a(href="/login")  로그인                    
                 li
-                    a(href="/join").header__btn  🧑‍🤝‍🧑회원가입
+                    a(href="/join").header__btn  회원가입

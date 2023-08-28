@@ -12,6 +12,7 @@ import flash from "express-flash";
 
 const app=express();
 const logger=morgan("dev");
+
 app.use(flash());
 app.use(logger);
 app.set("view engine","pug");
@@ -40,6 +41,7 @@ app.use("/",rootRouter);
 app.use("/videos",videoRouter);
 app.use("/users",userRouter);
 app.use("/api",apiRouter);
+
 
 
 export default app;

@@ -20,6 +20,7 @@
 @import "./screens/home.scss";
 @import "./screens/upload.scss";
 @import "./screens/watch.scss";
+@import "./screens/notice.scss";
 
 // Defaults
 a {
@@ -30,7 +31,7 @@ a {
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    background-color: beige;
+    background-color: rgb(217, 212, 212);
     color: black;
 }
 

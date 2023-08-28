@@ -2,10 +2,16 @@ extends base.pug
 include mixins/video
 
 
-block content 
-    span.hello 승호의 헬스튜브에 오신것을 환영합니다
+block content
+    span 공지사항
     br
+    hr
     br
+    a(href="/notice")
+        span.noticeStart 공지사항 반드시 읽어주세요.
+    hr
+    br
+
     br
     div.video-grid
         each video in videos
