@@ -7,11 +7,12 @@ import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 import { localsMiddleware } from "./middlewares";
 import apiRouter from "./routers/apiRouter";
-
+import flash from "express-flash";
 
 
 const app=express();
 const logger=morgan("dev");
+app.use(flash());
 app.use(logger);
 app.set("view engine","pug");
 app.set("views",process.cwd()+"/src/views");
