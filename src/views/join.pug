@@ -1,9 +1,13 @@
 extends base
 
 block content 
-    if errorMessage
-        span=errorMessage
-    form(method="POST")
+    body.background-image
+        img(src='./uploads/헬스.jpg', alt='Background Image')
+    form(method="POST").login-form
+        if errorMessage
+            span.errorMessage=errorMessage
+            br
+            br
         input(placeholder="본인 이름",name="name",type="text",required).submitnotinput
         input(placeholder="이메일",name="email",type="email",required).submitnotinput
         input(placeholder="아이디",name="username",type="text",required).submitnotinput

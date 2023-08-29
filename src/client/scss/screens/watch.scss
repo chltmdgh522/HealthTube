@@ -5,6 +5,7 @@
     .video__title {
       font-size: 26px;
       margin-bottom: 5px;
+      font-weight: 700;
     }
     .video__createdAt {
       font-size: 12px;
@@ -12,10 +13,14 @@
     .video__owner {
       margin-bottom: 5px;
       font-size: 14px;
+      font-weight: 600;
       a {
         color: cornflowerblue;
         text-decoration: underline;
       }
+    }
+    .video__email{
+      font-weight: 600;
     }
   }
   .video__comments {
@@ -23,13 +28,28 @@
     flex-direction: column;
     max-width: 320px;
     width: 100%;
-    margin: 0 auto;
+    margin-right:80px;
     margin-top: 20px;
+    form{
+      border: none;
+    }
     .video__comment {
       padding: 10px;
       border-radius: 9999px;
       background-color: white;
       color: black;
       margin-bottom: 10px;
+     
     }
+  }
+  .video__comment-form{
+    width: 700px;
+    height: 20px;
+    font-size: 14px;
+    background-color: white;
+    resize: none;
+    color: black;
+    border: none;
+    border-bottom: 2px solid #0000007e;
+    outline: none;
   }

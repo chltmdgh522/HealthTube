@@ -1,0 +1,58 @@
+  .background-image img {
+    
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    z-index: -1;
+    }
+   .login-form {
+    margin-top: 100px;  
+    background-color: rgba(255, 255, 255, 0.8); // 배경 색상 및 투명도 조절
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); // 그림자 추
+  }
+  header{
+    background-color: rgb(217, 212, 212);
+
+  }
+
+  .disctription{
+    background-color: beige;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-radius: 10px;
+  }
+  .disctription__1{
+    margin-left:10px;
+  }
+  .hashtags{
+    color:cornflowerblue;
+  }
+  .disc{
+    font-size:18px;
+    font-weight: 700;
+  }
+  .edit{
+    background-color: blanchedalmond;
+
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-radius: 10px;
+    .edit__1{
+      margin-left:10px;
+      a{
+        font-weight: 700;
+        color:cornflowerblue;
+      }
+      .danger{
+        color:red;
+      }
+    }
+  }
+
+
+  

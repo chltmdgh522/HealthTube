@@ -21,23 +21,47 @@ block content
                     i.fas.fa-expand
     div.video__data
         p.video__title=video.title
-        small.video__owner Uploaded by 
-            a(href=`/users/${video.owner._id}`)=video.owner.name
-        small.video__createdAt=new Date(video.createdAt).toLocaleDateString("ko-kr", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
-        if String(video.owner._id) === String(loggedInUser._id)
-            a(href=`${video._id}/edit`) Edit Video &rarr;
-            br
-            a(href=`${video.id}/delete`) Delete Video &rarr;
+        br
+        small.video__owner 
+            a(href=`/users/${video.owner._id}`)=video.owner.name 
+            span           
+            small.video__email=video.owner.email
+        br
+        br
+        div.disctription
+            div.disctription__1
+                span=new Date(video.createdAt).toLocaleDateString("ko-kr", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
+                br
+                br
+                span 조회수 #{video.meta.views}회 
+                span 
+                span
+                span.hashtags #{video.hashtags} 
+                br
+                br
+                span.disc #{video.description} 
+                br
+        br
+        div.edit
+            div.edit__1
+                if String(video.owner._id) === String(loggedInUser._id)
+                    a(href=`${video._id}/edit`) 편집하기 
+                    br
+                    br
+                    a(href=`${video.id}/delete`).danger 삭제하기
+                else 
+                    span 본인 영상이 아니라서 편집이나 삭제를 할 수 없습니다.
     if loggedIn
         div.video__comments
-            form.video__comment-form#commentForm
-                textarea(cols="30", rows="10", placeholder="댓글을 남겨주세요")
-                button 댓글작성 
+            form#commentForm
+                textarea.video__comment-form(cols="30", rows="10", placeholder="댓글은 익명이니 마음껏 남겨주세요")
+                button.button 댓글작성 
     div.video__comments
         ul
             each comment in video.comments.reverse()
                 li.video__comment(data-id=comment._id)
-                    i.fas.fa-comment
+                    span=comment.owner.name
+                    i.fas.fa-heartbeat
                     span  #{comment.text}
                     span.deleteBtn ❌
 

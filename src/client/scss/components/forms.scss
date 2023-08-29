@@ -33,7 +33,7 @@ form {
     width: 90%;
     border-radius: 5px;
     padding: 12px 20px;
-    background-color: rgb(155, 149, 132);
+    background-color: rgb(231, 206, 140);
     color: rgba($color: $red, $alpha: 1);
     text-align: center;
     cursor: pointer;
@@ -48,4 +48,11 @@ form {
     text-align: center;
     cursor: pointer;
     display: block;
+  }
+  .errorMessage{
+    color: red;
+    font-weight:700;
+  }
+  .label{
+    font-weight: 700;
   }
