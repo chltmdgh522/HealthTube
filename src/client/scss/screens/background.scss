@@ -1,4 +1,4 @@
-  .background-image img {
+  .background-image{
     
     width: 100%;
     height: 100%;
@@ -7,7 +7,7 @@
     bottom:0;
     left:0;
     right:0;
-    z-index: -1;
+    z-index: -3;
     }
    .login-form {
     margin-top: 100px;  
@@ -15,10 +15,7 @@
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); // 그림자 추
   }
-  header{
-    background-color: rgb(217, 212, 212);
 
-  }
 
   .disctription{
     background-color: beige;
@@ -54,5 +51,18 @@
     }
   }
 
+  .deleteMent{
+    font-weight: 700;
+  }
 
-  
+  .empty__message{
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .headerhr{
+    border: 3px solid rgb(48, 42, 42);
+    position: relative; /* 부모 컨테이너를 기준으로 설정 */
+    top: -10px; /* 원하는 만큼 음수 값으로 조정 */
+    opacity: 0.8;
+  }

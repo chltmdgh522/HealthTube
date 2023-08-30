@@ -1,8 +1,7 @@
 extends base
 
 block content 
-    body.background-image
-        img(src='./uploads/헬스.jpg', alt='Background Image')
+    img(src='/uploads/헬스.jpg', alt='Background Image').background-image
     form(method="POST").login-form
         if errorMessage
             span.errorMessage=errorMessage

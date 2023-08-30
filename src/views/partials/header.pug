@@ -1,4 +1,5 @@
 header.header
+    
     a(href="/").header__logo 
         span 헬스튜브
         i.fas.fa-running
@@ -11,7 +12,7 @@ header.header
             
             if loggedIn
                 li
-                    a(href="/videos/upload") 🆙영상 업로드 
+                    a(href="/videos/upload") 영상 업로드 
                
                 li
                     a(href=`/users/${loggedInUser._id}`)
@@ -25,9 +26,10 @@ header.header
                 li
                     a(href=`/users/${loggedInUser._id}`) #{loggedInUser.name}의 프로필    
                 li
-                    a(href="/users/edit") 프로필 편집
+                    a(href="/users/edit") 마이페이지 편집
                 li
                     a(href="/users/logout")  로그아웃
+                
             else
                 li
                     a(href="/login")  로그인                    

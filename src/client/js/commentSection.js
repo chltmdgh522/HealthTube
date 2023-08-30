@@ -11,24 +11,24 @@ const addComment = (text, id) => {
 
   const icon = document.createElement("i");
   const span = document.createElement("span");
-  const deleteIcon = document.createElement("span");
+
 
   newComment.className = "video__comment";
-  icon.className = "fas fa-comment";
-  deleteIcon.className = "delete__icon";
+  icon.className=".fa-heartbeat";
+
 
   newComment.appendChild(icon);
 
   span.innerText = ` ${text}`;
-  deleteIcon.innerText = "❌";
+
 
   newComment.appendChild(span);
 
-  newComment.appendChild(deleteIcon);
+
 
   videoComments.prepend(newComment);
 
-  deleteIcon.addEventListener("click", handleDelete);
+
 };
 
 const handleSubmit = async (event) => {
@@ -55,32 +55,8 @@ const handleSubmit = async (event) => {
   }
 };
 
-const handleDelete = async (event) => {
-  const deleteComment = event.target.parentElement;
 
-  const {
-    dataset: { id },
-  } = event.target.parentElement;
 
-  const videoId = videoContainer.dataset.id;
 
-  const response = await fetch(`/api/videos/${videoId}/comments/delete`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ commentId: id }),
-  });
-
-  if (response.status === 200) {
-    deleteComment.remove();
-  }
-};
-
-if (form) {
   form.addEventListener("submit", handleSubmit);//click 쓰면 클릭하는것만 감지하기 때문,,, 우리는 form 제출을 감지해야함 
-}
 
-if (deleteIcon) {
-  deleteIcon.forEach((icon) => icon.addEventListener("click", handleDelete));
-}

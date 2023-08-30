@@ -1,5 +1,31 @@
 .noticeStart{
     font-size: larger;
-    color:white;
+    color:rgb(95, 91, 91);
     font-weight: 900;
+    background-color: rgba(255, 255, 255, 0.8); // 배경 색상 및 투명도 조절
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+}
+.notice{
+    color:black;
+    font-weight: 600;
+    font-size:20px;
+    
+}
+.notice__main{
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+}
+.mainhr{
+    border: 3px solid rgb(140, 130, 130);
+}
+
+.notice__body{
+    margin-top: 80px;
+    padding: 30px;  
+    background-color: rgba(255, 255, 255, 0.8); // 배경 색상 및 투명도 조절
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }

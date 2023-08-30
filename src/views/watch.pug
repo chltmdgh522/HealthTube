@@ -50,20 +50,19 @@ block content
                     br
                     a(href=`${video.id}/delete`).danger 삭제하기
                 else 
-                    span 본인 영상이 아니라서 편집이나 삭제를 할 수 없습니다.
+                    span.deleteMent 본인 영상이 아니라서 편집이나 삭제를 할 수 없습니다.
     if loggedIn
         div.video__comments
             form#commentForm
                 textarea.video__comment-form(cols="30", rows="10", placeholder="댓글은 익명이니 마음껏 남겨주세요")
-                button.button 댓글작성 
+                button.button.commentbutton 댓글작성 
     div.video__comments
         ul
             each comment in video.comments.reverse()
                 li.video__comment(data-id=comment._id)
-                    span=comment.owner.name
                     i.fas.fa-heartbeat
                     span  #{comment.text}
-                    span.deleteBtn ❌
+               
 
     block scripts
     script(src="/static/js/videoPlayer.js") 
