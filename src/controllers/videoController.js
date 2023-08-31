@@ -8,7 +8,7 @@ export const home = async (req, res) => {
     const videos = await Video.find({})
     .sort({ createdAt: "desc" })
     .populate("owner");
-    return res.render("home", { pageTitle: "🏠Home🏠", videos });
+    return res.render("home", { pageTitle: "🏠홈🏠", videos });
 };
 
 export const watch = async(req, res) => {
@@ -117,7 +117,7 @@ export const search = async (req, res) => {
       },
     }).populate("owner");
   }
-  return res.render("search", { pageTitle: "Search", videos });
+  return res.render("search", { pageTitle: "검색", videos });
 };
 
 export const registerView = async(req,res)=>{
@@ -175,5 +175,5 @@ export const deleteComment = async (req, res) => {
 };
 
 export const getNotice=(req,res)=>{
-return res.render("notice",{pageTitle:"📢notice"});
+return res.render("notice",{pageTitle:"📢공지사항"});
 };

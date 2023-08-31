@@ -140,7 +140,7 @@ export const finishGithubLogin=async(req,res)=>{
       };
 
 export const getEdit=(req,res)=>{
-  return res.render("edit-profile",{pageTitle:"프로필 수정"});
+  return res.render("edit-profile",{pageTitle:"마이페이지 편집"});
 };
 
 export const postEdit=async(req,res)=>{
