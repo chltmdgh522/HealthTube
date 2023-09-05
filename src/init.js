@@ -6,6 +6,6 @@ import "./models/User";
 import app from "./server";
 
 const PORT = process.env.PORT || "3000"
-const handleListening=()=>console.log(`${PORT}서버 세상의 오신것을 환영합니다😊`);
+const handleListening=()=>console.log(`${PORT}서버 세상의 오신것을 환영합니😊`);
 
 app.listen(PORT,handleListening);

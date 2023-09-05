@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node build/init.js",
     "build": "npm run build:server && npm run build:assets",
-    "build:server":"babel src -d build", 
+    "build:server": "babel src -d build",
     "build:assets": "webpack --mode=production",
     "back": "nodemon",
     "front": "webpack --mode=development -w"
@@ -34,6 +34,7 @@
     "@babel/core": "^7.22.11",
     "@babel/node": "^7.22.6",
     "@babel/preset-env": "^7.22.9",
+    "@flydotio/dockerfile": "^0.4.8",
     "babel-loader": "^9.1.3",
     "css-loader": "^6.8.1",
     "mini-css-extract-plugin": "^2.7.6",
